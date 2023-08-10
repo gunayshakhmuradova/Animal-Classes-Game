@@ -1,24 +1,24 @@
 class Animal {
-   constructor (color = 'yellow', energy = 100) {
-    this.color = color;
-    this.energy = energy;
-   }
-   isActive() {
-    if (this.energy > 0){
-        this.energy -=20;
-        console.log('Energy is decreasing, currently at:', this.energy)
-    } else if (this.energy == 0) {
-        this.sleep();
+    constructor (color = 'yellow', energy = 100) {
+        this.color = color;
+        this.energy = energy;
     }
-   }
-   sleep() {
-    this.energy += 20;
-    console.log('Energy is increasing, currently at:', this.energy)
-   }
-
-   getColor() {
-    console.log(this.color)
-   }
+    isActive() {
+        if (this.energy > 0){
+            this.energy -=20;
+            console.log('Energy is decreasing, currently at:', this.energy)
+        } else if (this.energy == 0) {
+            this.sleep();
+        }
+    }
+    sleep() {
+        this.energy += 20;
+        console.log('Energy is increasing, currently at:', this.energy)
+    }
+    
+    getColor() {
+        console.log(this.color)
+    }
 }
 
 class Cat extends Animal {
@@ -51,46 +51,63 @@ class HouseCat extends Cat {
     }
     makeSound(option) {
         if(option) {
-            super.makeSound()}
-            console.log (this.houseCatSound);
+            super.makeSound();
         }
+        console.log(this.houseCatSound);
     }
+}
 
-    class Tiger extends Cat {
-        constructor(tigerSound = "Roar!", sound,canJumpHigh,canClimbTrees, color,energy) {
-            super(sound,canJumpHigh,canClimbTrees, color,energy);
-            this.tigerSound = tigerSound;
-        }
-        makeSound(option) {
-            if (option) {
-                super.makeSound();
-            }
-            console.log(this.tigerSound);
-        }
+class Tiger extends Cat {
+    constructor(tigerSound = "Roar!", sound,canJumpHigh,canClimbTrees, color,energy) {
+        super(sound,canJumpHigh,canClimbTrees, color,energy);
+        this.tigerSound = tigerSound;
     }
-    
-    class Parrot extends Bird {
-        constructor(canTalk = false, sound,canFly, color,energy) {
-            super(sound,canFly, color,energy);
-            this.canTalk = canTalk;
+    makeSound(option) {
+        if (option) {
+            super.makeSound();
         }
-        makeSound(option) {
-            if (option) {
-                super.makeSound();
-            }
-            if (this.canTalk) {
-                console.log("I'm a talking parrot!");
-            }
-        }
+        console.log(this.tigerSound);
     }
+}
 
-    var polly = new Parrot (true);
-    var fiji = new Parrot (false);
+class Parrot extends Bird {
+    constructor(canTalk = false, sound,canFly, color,energy) {
+        super(sound,canFly, color,energy);
+        this.canTalk = canTalk;
+    }
+    makeSound(option) {
+        if (option) {
+            super.makeSound();
+        }
+        if (this.canTalk) {
+            console.log("I'm a talking parrot!");
+        }
+    }
+}
+
+document.getElementById("runButton").addEventListener("click", function() {
+    var polly = new Parrot(true);
+    var fiji = new Parrot(false);
     polly.makeSound(true);
     fiji.makeSound(false);
     polly.color = "yellow";
     polly.energy = 100;
-    polly.isActive(true);
-
+    polly.isActive();
+    
     var leo = new HouseCat();
     leo.makeSound(false);
+});
+document.getElementById("parrotBtn").addEventListener("click", function() {
+    var polly = new Parrot(true);
+    polly.makeSound(true);
+});
+
+document.getElementById("houseCatBtn").addEventListener("click", function() {
+    var leo = new HouseCat();
+    leo.makeSound(false);
+});
+
+document.getElementById("tigerBtn").addEventListener("click", function() {
+    var tiger = new Tiger();
+    tiger.makeSound(true);
+});
